@@ -1,0 +1,9 @@
+POST {{baseUrl}}/api/v1/user/registration
+Accept: application/json
+Content-Type: application/json
+
+{
+  "fullname": "Ivan Balashov",
+  "login": "racooon",
+  "password": "test"
+}

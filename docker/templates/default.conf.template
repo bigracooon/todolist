@@ -20,7 +20,7 @@ server {
            set $phphttps 'on';
         }
         fastcgi_param HTTPS $phphttps;
-        set $app "app:9000";
+        set $app "user:9000";
 
         fastcgi_pass $app;
         fastcgi_index index.php;
