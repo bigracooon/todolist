@@ -1,0 +1,33 @@
+version: "3"
+services:
+  nginx:
+    image: nginx:latest
+    volumes:
+      - ./templates:/etc/nginx/templates
+      - ./../services/user:/application
+    ports:
+      - "${NGINX_EXTERNAL_PORT}:${NGINX_INTERNAL_PORT}"
+    environment:
+      - NGINX_PORT=${NGINX_INTERNAL_PORT}
+    networks:
+      - todolist
+  user:
+    build:
+      context: ../
+      dockerfile: docker/user_ms/php/Dockerfile
+    volumes:
+      - ./../services/user:/application
+    networks:
+      - todolist
+  database:
+    image: postgres
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    ports:
+      - ${POSTGRES_PORT}:5432
+    networks:
+      - todolist
+networks:
+  todolist:
