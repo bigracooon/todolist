@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
-use App\DTO\Request\RegistrationUserRequest;
-use App\DTO\Response\RegistrationUserResponse;
-use App\Entity\User;
-use App\Repository\UserRepository;
+use App\DTO\RegistrationUserDto;
+use App\Exception\ValidationException;
+use App\Request\RegistrationUserRequest;
+use App\Response\RegistrationUserResponse;
+use App\Service\AuthService;
+use App\Types\Password;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -17,6 +19,9 @@ use Symfony\Component\Routing\Attribute\Route;
 
 final class RegistrationController extends AbstractController
 {
+    /**
+     * @throws ValidationException
+     */
     #[Route(
         path: 'api/v1/user/registration',
         name: 'registration',
@@ -24,19 +29,16 @@ final class RegistrationController extends AbstractController
     )]
     public function __invoke(
         #[MapRequestPayload] RegistrationUserRequest $registrationUserRequest,
-        EntityManagerInterface                       $entityManager,
-        UserPasswordHasherInterface                  $hasher,
+        AuthService                                  $authService
     ): JsonResponse
     {
-        $user = new User(
-            fullname: $registrationUserRequest->fullname,
+        $registrationUserDto = new RegistrationUserDto(
+            password: new Password($registrationUserRequest->password),
             login: $registrationUserRequest->login,
+            fullName: $registrationUserRequest->fullname
         );
 
-        $password = $hasher->hashPassword($user, $registrationUserRequest->password);
-        $user->setPassword($password);
-        $entityManager->persist($user);
-        $entityManager->flush();
+        $authService->registration($registrationUserDto);
 
         return $this->json((new RegistrationUserResponse(
             fullname: $registrationUserRequest->fullname,

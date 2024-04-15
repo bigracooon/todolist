@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\DTO\Response;
+namespace App\Response;
 
 final readonly class RegistrationUserResponse implements ResponseInterface
 {
