@@ -37,7 +37,7 @@ class AuthService
             login: $dto->login,
         );
 
-        $password = $this->hasher->hashPassword($user, $dto->password->password);
+        $password = $this->hasher->hashPassword($user, $dto->password->value);
         $user->setPassword($password);
         $this->entityManager->persist($user);
         $this->entityManager->flush();

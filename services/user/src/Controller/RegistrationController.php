@@ -10,11 +10,9 @@ use App\Request\RegistrationUserRequest;
 use App\Response\RegistrationUserResponse;
 use App\Service\AuthService;
 use App\Types\Password;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpKernel\Attribute\MapRequestPayload;
-use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Attribute\Route;
 
 final class RegistrationController extends AbstractController
