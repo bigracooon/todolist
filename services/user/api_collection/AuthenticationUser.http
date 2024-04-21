@@ -1,0 +1,8 @@
+POST {{baseUrl}}/api/v1/user/auth
+Accept: application/json
+Content-Type: application/json
+
+{
+  "login": "racooon1",
+  "password": "еуые"
+}

@@ -1,26 +1,19 @@
 <?php
 
-declare(strict_types=1);
-
-namespace App\Request;
+namespace App\Request\Auth;
 
 use Symfony\Component\Validator\Constraints as Assert;
 
-final readonly class RegistrationUserRequest
+final readonly class AuthenticateRequest
 {
     public function __construct(
-        #[Assert\NotBlank(message: "Field fullname required")]
-        #[Assert\Type('string')]
-        public string $fullname,
-
         #[Assert\NotBlank(message: "Field login required")]
         #[Assert\Type('string')]
         public string $login,
 
-        #[Assert\NotBlank(message: "Field login required")]
+        #[Assert\NotBlank(message: "Field password required")]
         #[Assert\Type('string')]
         public string $password,
     ) {
-
     }
 }

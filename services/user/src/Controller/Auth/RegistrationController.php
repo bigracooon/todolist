@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\Controller;
+namespace App\Controller\Auth;
 
 use App\DTO\RegistrationUserDto;
 use App\Exception\ValidationException;
-use App\Request\RegistrationUserRequest;
+use App\Request\Auth\RegistrationUserRequest;
 use App\Response\RegistrationUserResponse;
 use App\Service\AuthService;
 use App\Types\Password;

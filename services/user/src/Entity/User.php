@@ -37,10 +37,12 @@ final readonly class User implements UserInterface, PasswordAuthenticatedUserInt
     public function __construct(
         string $fullname,
         string $login,
+        string $password
     )
     {
         $this->fullname = $fullname;
         $this->login = $login;
+        $this->password = $password;
         $this->roles = [UserRoles::RoleUser->value];
     }
 

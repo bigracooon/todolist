@@ -4,6 +4,6 @@ Content-Type: application/json
 
 {
   "fullname": "Ivan Balashov",
-  "login": "racooon",
-  "password": "test"
+  "login": "racooon1",
+  "password": "123456789"
 }
