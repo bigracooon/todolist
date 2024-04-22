@@ -19,6 +19,14 @@ services:
       - ./../services/user:/application
     networks:
       - todolist
+  post:
+    build:
+      context: ../
+      dockerfile: docker/post_ms/php/Dockerfile
+    volumes:
+      - ./../services/post:/application
+    networks:
+      - todolist
   database:
     image: postgres
     environment:

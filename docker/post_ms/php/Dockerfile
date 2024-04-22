@@ -39,6 +39,8 @@ RUN echo "xdebug.mode=coverage" >> /usr/local/etc/php/conf.d/docker-php-ext-xdeb
 RUN curl https://raw.githubusercontent.com/composer/getcomposer.org/76a7060ccb93902cd7576b67264ad91c8a2700e2/web/installer | php -- --quiet \
     && mv composer.phar /usr/local/bin/composer
 
+RUN curl -sS https://get.symfony.com/cli/installer
+
 RUN groupadd -g $DOCKER_GID dev
 RUN useradd -g $DOCKER_GID -u $DOCKER_UID dev
 RUN mkdir /home/dev
