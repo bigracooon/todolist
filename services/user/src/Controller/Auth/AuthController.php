@@ -27,7 +27,7 @@ final class AuthController extends AbstractController
     )]
     public function authenticate(
         #[MapRequestPayload] AuthenticateRequest $authenticateRequest,
-        AuthService $authService
+        AuthService                              $authService
     ): JsonResponse
     {
         $dto = new AuthenticationDto(
@@ -35,7 +35,11 @@ final class AuthController extends AbstractController
             password: new Password($authenticateRequest->password),
         );
 
-        $authService->authenticate($dto);
-        return $this->json([]);
+        $token = $authService->authenticate($dto);
+
+        return $this->json([
+            'login' => $dto->login,
+            'access_token' => $token,
+        ]);
     }
 }

@@ -1,8 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Service;
 
+use App\Drivers\DriverContracts\AuthDriverContract;
 use App\DTO\AuthenticationDto;
+use App\DTO\EncryptTokenDto;
 use App\DTO\RegistrationUserDto;
 use App\Entity\User;
 use App\Exception\ValidationException;
@@ -16,6 +20,7 @@ final readonly class AuthService
         private EntityManagerInterface $entityManager,
         private UserRepository         $userRepository,
         private HashServiceInterface   $hashService,
+        private AuthDriverContract     $authDriver,
     )
     {
     }
@@ -33,7 +38,6 @@ final readonly class AuthService
             );
         }
 
-
         $user = new User(
             fullname: $dto->fullName,
             login: $dto->login,
@@ -47,22 +51,29 @@ final readonly class AuthService
     /**
      * @throws ValidationException
      */
-    public function authenticate(AuthenticationDto $dto): void
+    public function authenticate(AuthenticationDto $dto): string
     {
-        $existedUser = $this->userRepository->findOneBy(['login' => $dto->login]);
+        $user = $this->userRepository->findOneBy(['login' => $dto->login]);
 
-        if (!$existedUser) {
+        if (!$user) {
             throw new ValidationException(
                 message: "User with {$dto->login} undefined"
             );
         }
 
-        $verified = $this->hashService->verify($dto->password->value, $existedUser->password);
+        $verified = $this->hashService->verify($dto->password->value, $user->password);
 
         if (!$verified) {
             throw new ValidationException(
                 message: "User with {$dto->login} not verified"
             );
         }
+
+        $payloadTokenDto = new EncryptTokenDto(
+            $user->id,
+            $user->login
+        );
+
+        return $this->authDriver->encryptAuthData($payloadTokenDto);
     }
 }

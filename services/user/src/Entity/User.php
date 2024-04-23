@@ -20,7 +20,7 @@ final readonly class User implements UserInterface, PasswordAuthenticatedUserInt
     #[ORM\Column(type: UuidType::NAME, unique: true)]
     #[ORM\GeneratedValue(strategy: 'CUSTOM')]
     #[ORM\CustomIdGenerator(class: 'doctrine.uuid_generator')]
-    public ?Uuid $id;
+    public Uuid $id;
 
     #[ORM\Column(type: 'string', length: 255)]
     public string $fullname;
@@ -67,10 +67,5 @@ final readonly class User implements UserInterface, PasswordAuthenticatedUserInt
     public function getPassword(): ?string
     {
         return $this->password;
-    }
-
-    public function setPassword(string $password): void
-    {
-        $this->password = $password;
     }
 }
