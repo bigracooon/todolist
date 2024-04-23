@@ -10,7 +10,7 @@ services:
     environment:
       - NGINX_PORT=${NGINX_INTERNAL_PORT}
     networks:
-      - todolist
+      - list
   user:
     build:
       context: ../
@@ -18,7 +18,7 @@ services:
     volumes:
       - ./../services/user:/application
     networks:
-      - todolist
+      - list
   post:
     build:
       context: ../
@@ -26,7 +26,7 @@ services:
     volumes:
       - ./../services/post:/application
     networks:
-      - todolist
+      - list
   database:
     image: postgres
     environment:
@@ -36,6 +36,6 @@ services:
     ports:
       - ${POSTGRES_PORT}:5432
     networks:
-      - todolist
+      - list
 networks:
-  todolist:
+  list:

@@ -12,7 +12,10 @@ server {
         try_files $uri $uri /index.php?$query_string;
     }
 
-    location ~ \.php$ {
+    location ~ ^/user(/.*)?$ {
+        set $path_info $1;
+        set $app "user:9000";
+
         # IP DNS докера
         resolver 127.0.0.11 valid=10s;
         set $phphttps 'off';
@@ -20,14 +23,37 @@ server {
            set $phphttps 'on';
         }
         fastcgi_param HTTPS $phphttps;
-        set $app "user:9000";
 
         fastcgi_pass $app;
         fastcgi_index index.php;
-        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        fastcgi_param SCRIPT_FILENAME $document_root$path_info;
         fastcgi_param PHP_VALUE "error_log=/var/log/nginx/application_php_errors.log";
         fastcgi_buffers 16 32k;
         fastcgi_buffer_size 128k;
         include fastcgi_params;
+    }
+
+    location ~ ^/post(/.*)?$ {
+        set $app "post:9000";
+
+        # IP DNS докера
+        resolver 127.0.0.11 valid=10s;
+        set $phphttps 'off';
+        if ($http_x_forwarded_proto) {
+           set $phphttps 'on';
+        }
+        fastcgi_param HTTPS $phphttps;
+
+        fastcgi_pass $app;
+        fastcgi_index index.php;
+        fastcgi_param SCRIPT_FILENAME $document_root$1;
+        fastcgi_param PHP_VALUE "error_log=/var/log/nginx/application_php_errors.log";
+        fastcgi_buffers 16 32k;
+        fastcgi_buffer_size 128k;
+        include fastcgi_params;
+    }
+
+    location ~ \.php$ {
+        return 404;
     }
 }

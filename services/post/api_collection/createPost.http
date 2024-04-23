@@ -1,0 +1,8 @@
+POST {{baseUrl}}/api/post
+Accept: application/json
+Content-Type: application/json
+
+{
+    "title": "test",
+    "description": "Test post"
+}
