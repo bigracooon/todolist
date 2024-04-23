@@ -4,11 +4,14 @@ services:
     image: nginx:latest
     volumes:
       - ./templates:/etc/nginx/templates
-      - ./../services/user:/application
+      - ./../services/user:/user
+      - ./../services/post:/post
     ports:
-      - "${NGINX_EXTERNAL_PORT}:${NGINX_INTERNAL_PORT}"
+      - "${NGINX_EXTERNAL_PORT_USER}:${NGINX_INTERNAL_PORT_USER}"
+      - "${NGINX_EXTERNAL_PORT_POST}:${NGINX_INTERNAL_PORT_POST}"
     environment:
-      - NGINX_PORT=${NGINX_INTERNAL_PORT}
+      - NGINX_PORT_USER=${NGINX_INTERNAL_PORT_USER}
+      - NGINX_PORT_POST=${NGINX_INTERNAL_PORT_POST}
     networks:
       - list
   user:
