@@ -1,0 +1,48 @@
+server {
+    listen ${NGINX_PORT_ADMIN} default;
+
+    client_max_body_size 108M;
+
+    access_log /var/log/nginx/application.access.log;
+
+    root /admin/public;
+    index index.html index.htm index.php;
+
+    charset utf-8;
+
+    add_header X-Frame-Options "SAMEORIGIN";
+    add_header X-XSS-Protection "1; mode=block";
+    add_header X-Content-Type-Options "nosniff";
+
+    location / {
+        try_files $uri $uri/ /index.php?$query_string;
+    }
+
+    location = /favicon.ico { access_log off; log_not_found off; }
+    location = /robots.txt  { access_log off; log_not_found off; }
+
+    error_page 404 /index.php;
+
+    location ~ \.php$ {
+        # IP DNS докера
+        resolver 127.0.0.11 valid=10s;
+        set $phphttps 'off';
+        if ($http_x_forwarded_proto) {
+           set $phphttps 'on';
+        }
+        fastcgi_param HTTPS $phphttps;
+        set $app "admin:9000";
+
+        fastcgi_pass $app;
+        fastcgi_index index.php;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        fastcgi_param PHP_VALUE "error_log=/var/log/nginx/application_php_errors.log";
+        fastcgi_buffers 16 32k;
+        fastcgi_buffer_size 128k;
+        include fastcgi_params;
+    }
+
+    location ~ /\.(?!well-known).* {
+        deny all;
+    }
+}

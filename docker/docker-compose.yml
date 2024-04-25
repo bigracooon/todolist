@@ -6,12 +6,15 @@ services:
       - ./templates:/etc/nginx/templates
       - ./../services/user:/user
       - ./../services/post:/post
+      - ./../services/admin:/admin
     ports:
       - "${NGINX_EXTERNAL_PORT_USER}:${NGINX_INTERNAL_PORT_USER}"
       - "${NGINX_EXTERNAL_PORT_POST}:${NGINX_INTERNAL_PORT_POST}"
+      - "${NGINX_EXTERNAL_PORT_ADMIN}:${NGINX_INTERNAL_PORT_ADMIN}"
     environment:
       - NGINX_PORT_USER=${NGINX_INTERNAL_PORT_USER}
       - NGINX_PORT_POST=${NGINX_INTERNAL_PORT_POST}
+      - NGINX_PORT_ADMIN=${NGINX_INTERNAL_PORT_ADMIN}
     networks:
       - list
   user:
@@ -20,6 +23,14 @@ services:
       dockerfile: docker/user_ms/php/Dockerfile
     volumes:
       - ./../services/user:/application
+    networks:
+      - list
+  admin:
+    build:
+      context: ../
+      dockerfile: docker/admin/php/Dockerfile
+    volumes:
+      - ./../services/admin:/admin
     networks:
       - list
   post:

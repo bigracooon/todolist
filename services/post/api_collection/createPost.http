@@ -3,6 +3,6 @@ Accept: application/json
 Content-Type: application/json
 
 {
-    "title": "test",
+    "title": "Test 2",
     "description": "Test post"
 }

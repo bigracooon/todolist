@@ -5,14 +5,16 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreatePostRequest;
 use App\Models\Post;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
-    public function index()
+    public function index(): Collection|array
     {
-        //
+
+        return Post::query()->get();
     }
 
     public function store(CreatePostRequest $request): Model|Builder
