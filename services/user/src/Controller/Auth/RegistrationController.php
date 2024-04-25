@@ -8,7 +8,7 @@ use App\DTO\RegistrationUserDto;
 use App\Exception\ValidationException;
 use App\Request\Auth\RegistrationUserRequest;
 use App\Response\RegistrationUserResponse;
-use App\Service\AuthService;
+use App\Service\Auth\AuthService;
 use App\Types\Password;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;

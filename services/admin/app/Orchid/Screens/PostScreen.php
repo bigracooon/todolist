@@ -5,15 +5,24 @@ declare(strict_types=1);
 namespace App\Orchid\Screens;
 
 use App\Services\PostService;
-use Carbon\Carbon;
 use GuzzleHttp\Exception\GuzzleException;
+use Illuminate\Http\Request;
 use Orchid\Screen\Action;
+use Orchid\Screen\Actions\ModalToggle;
+use Orchid\Screen\Fields\Input;
+use Orchid\Screen\Fields\TextArea;
+use Orchid\Screen\Repository;
 use Orchid\Screen\Screen;
 use Orchid\Screen\TD;
 use Orchid\Support\Facades\Layout;
 
 class PostScreen extends Screen
 {
+    public function __construct(
+        private readonly PostService $postService
+    ) {
+    }
+
     /**
      * Fetch data to be displayed on the screen.
      *
@@ -22,8 +31,12 @@ class PostScreen extends Screen
      */
     public function query(): iterable
     {
+        $posts = array_map(function (array $data) {
+            return new Repository($data);
+        }, $this->postService->getPosts());
+
         return [
-            'posts' => (new PostService())->getPosts()
+            'posts' => $posts
         ];
     }
 
@@ -44,7 +57,12 @@ class PostScreen extends Screen
      */
     public function commandBar(): iterable
     {
-        return [];
+        return [
+            ModalToggle::make('Add Post')
+                ->modal('postModal')
+                ->method('create')
+                ->icon('plus'),
+        ];
     }
 
     /**
@@ -56,26 +74,28 @@ class PostScreen extends Screen
     {
         return [
             Layout::table('posts', [
-                $this->td('title', 'Title'),
-                $this->td('description', 'Description'),
-                $this->td('created_at', 'Created At', function ($createdAt) {
-                    return Carbon::parse($createdAt)->format('d.m.Y');
-                }),
-                $this->td('updated_at', 'Updated At', function ($updatedAt) {
-                    return Carbon::parse($updatedAt)->format('d.m.Y');
-                })
-            ])
+                TD::make('title'),
+                TD::make('description'),
+                TD::make('created_at', 'Created at'),
+                TD::make('updated_at', 'Updated at'),
+            ]),
+            Layout::modal('postModal', Layout::rows([
+                Input::make('title')->placeholder('Enter title'),
+                TextArea::make('description')->placeholder('Enter description'),
+            ]))
+                ->title('Create new post')
+                ->applyButton('Add post')
         ];
     }
 
-    private function td(string $name, string $title, ?callable $format = null): TD
+    public function create(Request $request): void
     {
-        return TD::make($name, $title)->render(function (array $data) use ($name, $format) {
-            if ($format) {
-                return $format($data[$name]);
-            }
+        $request->validate([
+            'title' => 'required',
+            'description' => 'required',
+        ]);
 
-            return $data[$name];
-        });
+        $data = $request->all();
+        $this->postService->create($data);
     }
 }

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Service;
+namespace App\Service\Auth;
 
 use App\Drivers\DriverContracts\AuthDriverContract;
 use App\DTO\AuthenticationDto;
@@ -14,7 +14,7 @@ use App\Repository\UserRepository;
 use App\Service\Hash\HashServiceInterface;
 use Doctrine\ORM\EntityManagerInterface;
 
-final readonly class AuthService
+final readonly class AuthService implements AuthServiceInterface
 {
     public function __construct(
         private EntityManagerInterface $entityManager,

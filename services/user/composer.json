@@ -4,7 +4,7 @@
     "minimum-stability": "stable",
     "prefer-stable": true,
     "require": {
-        "php": ">=8.2",
+        "php": ">=8.3",
         "ext-ctype": "*",
         "ext-iconv": "*",
         "doctrine/dbal": "^3",
@@ -64,6 +64,9 @@
         ],
         "post-update-cmd": [
             "@auto-scripts"
+        ],
+        "test": [
+            "bin/phpunit --coverage-text --color"
         ]
     },
     "conflict": {
@@ -76,6 +79,11 @@
         }
     },
     "require-dev": {
-        "symfony/maker-bundle": "^1.58"
+        "phpunit/phpunit": "^9.5",
+        "ramsey/uuid": "*",
+        "symfony/browser-kit": "7.0.*",
+        "symfony/css-selector": "7.0.*",
+        "symfony/maker-bundle": "^1.58",
+        "symfony/phpunit-bridge": "^7.0"
     }
 }

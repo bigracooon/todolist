@@ -7,7 +7,7 @@ namespace App\Controller\Auth;
 use App\DTO\AuthenticationDto;
 use App\Exception\ValidationException;
 use App\Request\Auth\AuthenticateRequest;
-use App\Service\AuthService;
+use App\Service\Auth\AuthService;
 use App\Types\Password;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
