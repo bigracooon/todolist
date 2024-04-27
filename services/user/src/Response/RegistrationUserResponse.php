@@ -12,6 +12,12 @@ final readonly class RegistrationUserResponse implements ResponseInterface
     ) {
     }
 
+    /**
+     * @return array{
+     *     'login':string,
+     *     'password': string
+     * }
+     */
     public function getData(): array
     {
         return [

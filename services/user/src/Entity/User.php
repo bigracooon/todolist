@@ -31,6 +31,9 @@ final readonly class User implements UserInterface, PasswordAuthenticatedUserInt
     #[ORM\Column(type: 'string', length: 255)]
     public string $password;
 
+    /**
+     * @var array <int, string>
+     */
     #[ORM\Column(type: 'json')]
     public array $roles;
 

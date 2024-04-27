@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Tests\Service\Auth;
+namespace App\Tests\Unit\Service\Auth;
 
 use App\Drivers\DriverContracts\AuthDriverContract;
 use App\DTO\AuthenticationDto;
@@ -52,7 +52,7 @@ class AuthServiceTest extends TestCase
      * @covers \App\Entity\User
      * @throws ValidationException
      */
-    public function testRegistration()
+    public function testRegistration(): void
     {
         $registrationUserDto = new RegistrationUserDto(
             password: new Password('password'),
@@ -90,17 +90,19 @@ class AuthServiceTest extends TestCase
      * @covers \App\DTO\EncryptTokenDto
      * @throws ValidationException
      */
-    public function testAuthenticate()
+    public function testAuthenticate(): void
     {
+        $password = 'password';
+
         $authenticationDto = new AuthenticationDto(
             login: 'login',
-            password: new Password('password')
+            password: new Password($password)
         );
 
         $user = new User(
             fullname: 'Ivanov Ivan',
             login: 'login',
-            password: 'hashed_password'
+            password: $password
         );
 
         $this->userRepositoryMock
@@ -121,5 +123,66 @@ class AuthServiceTest extends TestCase
         $result = $this->authService->authenticate($authenticationDto);
 
         $this->assertEquals('encrypted_token', $result);
+    }
+
+    /**
+     * @covers ::authenticate
+     * @covers ::__construct
+     * @covers \App\Types\Password
+     * @covers \App\DTO\AuthenticationDto
+     * @throws ValidationException
+     */
+    public function testUserUndefined(): void
+    {
+        $authenticationDto = new AuthenticationDto(
+            login: 'login',
+            password: new Password('password')
+        );
+
+        $this->userRepositoryMock
+            ->expects($this->once())
+            ->method('findOneBy')
+            ->willReturn(null);
+
+        $this->expectException(ValidationException::class);
+        $this->authService->authenticate($authenticationDto);
+    }
+
+    /**
+     * @covers ::authenticate
+     * @covers \App\DTO\AuthenticationDto
+     * @covers \App\Entity\User
+     * @covers \App\Service\Auth\AuthService
+     * @covers \App\Types\Password
+     * @throws ValidationException
+     */
+    public function testUnverifiedUser(): void
+    {
+        $password = 'password';
+        $invalidPassword = 'invalid_password';
+
+        $authenticationDto = new AuthenticationDto(
+            login: 'login',
+            password: new Password($invalidPassword)
+        );
+
+        $user = new User(
+            fullname: 'Ivanov Ivan',
+            login: 'login',
+            password: $password
+        );
+
+        $this->userRepositoryMock
+            ->expects($this->once())
+            ->method('findOneBy')
+            ->willReturn($user);
+
+        $this->hashServiceMock
+            ->expects($this->once())
+            ->method('verify')
+            ->willReturn(false);
+
+        $this->expectException(ValidationException::class);
+        $this->authService->authenticate($authenticationDto);
     }
 }

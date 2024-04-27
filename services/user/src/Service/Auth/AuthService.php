@@ -48,7 +48,10 @@ final readonly class AuthService implements AuthServiceInterface
         $this->entityManager->flush();
     }
 
+
     /**
+     * @param AuthenticationDto $dto
+     * @return string Access token
      * @throws ValidationException
      */
     public function authenticate(AuthenticationDto $dto): string

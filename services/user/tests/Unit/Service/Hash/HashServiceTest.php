@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests\Service\Hash;
+namespace App\Tests\Unit\Service\Hash;
 
 use App\Service\Hash\HashService;
 use App\Service\Hash\HashServiceInterface;

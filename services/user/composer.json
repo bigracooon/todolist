@@ -66,7 +66,7 @@
             "@auto-scripts"
         ],
         "test": [
-            "bin/phpunit --coverage-text --color"
+            "vendor/bin/phpunit --coverage-text --color"
         ]
     },
     "conflict": {
@@ -79,7 +79,9 @@
         }
     },
     "require-dev": {
+        "phpstan/phpstan": "^1.10",
         "phpunit/phpunit": "^9.5",
+        "qossmic/deptrac-shim": "^1.0",
         "ramsey/uuid": "*",
         "symfony/browser-kit": "7.0.*",
         "symfony/css-selector": "7.0.*",

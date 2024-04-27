@@ -16,13 +16,13 @@ final readonly class JwtDriver implements AuthDriverContract
 
     public function encryptAuthData(EncryptTokenDto $dto): string
     {
-        $header = $this->base64url_encode(json_encode([
+        $header = $this->base64url_encode((string)json_encode([
             'alg' => 'HS256',
             'typ' => 'JWT',
             'exp' => time() + 3600,
         ]));
 
-        $payload = $this->base64url_encode(json_encode([
+        $payload = $this->base64url_encode((string)json_encode([
             'userId' => $dto->userId,
             'login' => $dto->login,
         ]));
@@ -32,7 +32,7 @@ final readonly class JwtDriver implements AuthDriverContract
         return $header . "." . $payload . "." . base64_encode($signature);
     }
 
-    public function decryptAuthData()
+    public function decryptAuthData(): void
     {
         // TODO: Implement decryptAuthData() method.
     }
@@ -42,7 +42,7 @@ final readonly class JwtDriver implements AuthDriverContract
         return false;
     }
 
-    private function base64url_encode($data): string
+    private function base64url_encode(string $data): string
     {
         return rtrim(strtr(base64_encode($data), '+/', '-_'), '=');
     }

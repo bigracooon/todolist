@@ -6,5 +6,8 @@ namespace App\Response;
 
 interface ResponseInterface
 {
+    /**
+     * @return array <mixed>
+     */
     public function getData(): array;
 }
