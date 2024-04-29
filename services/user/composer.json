@@ -79,6 +79,7 @@
         }
     },
     "require-dev": {
+        "fakerphp/faker": "^1.23",
         "phpstan/phpstan": "^1.10",
         "phpunit/phpunit": "^9.5",
         "qossmic/deptrac-shim": "^1.0",

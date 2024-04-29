@@ -21,8 +21,7 @@ final readonly class AuthService implements AuthServiceInterface
         private UserRepository         $userRepository,
         private HashServiceInterface   $hashService,
         private AuthDriverContract     $authDriver,
-    )
-    {
+    ) {
     }
 
     /**
@@ -34,7 +33,7 @@ final readonly class AuthService implements AuthServiceInterface
 
         if ($existedUser) {
             throw new ValidationException(
-                message: "User {$dto->login} already exists"
+                message: "User $dto->login already exists"
             );
         }
 
@@ -60,7 +59,7 @@ final readonly class AuthService implements AuthServiceInterface
 
         if (!$user) {
             throw new ValidationException(
-                message: "User with {$dto->login} undefined"
+                message: "User with $dto->login undefined"
             );
         }
 
@@ -68,7 +67,7 @@ final readonly class AuthService implements AuthServiceInterface
 
         if (!$verified) {
             throw new ValidationException(
-                message: "User with {$dto->login} not verified"
+                message: "User with $dto->login not verified"
             );
         }
 

@@ -12,7 +12,8 @@ final readonly class Password
     public function __construct(
         public string $value
     ) {
-        if (strlen($this->value) < 8) {
+        if (
+            strlen($this->value) < 8) {
             throw new ValidationException(
                 'Password must be more than 8 characters',
                 422
