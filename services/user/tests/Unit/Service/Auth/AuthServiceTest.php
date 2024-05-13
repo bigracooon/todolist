@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Tests\Unit\Service\Auth;
 
-use App\Drivers\DriverContracts\AuthDriverContract;
+use App\Driver\DriverContracts\AuthDriverContract;
 use App\DTO\AuthenticationDto;
 use App\DTO\RegistrationUserDto;
 use App\Entity\User;
@@ -82,6 +82,33 @@ class AuthServiceTest extends TestCase
     }
 
     /**
+     * @covers \App\Entity\User
+     * @covers \App\DTO\RegistrationUserDto
+     * @covers \App\Types\Password
+     * @covers ::registration
+     * @covers ::__construct
+     * @throws ValidationException
+     */
+    public function testUserAlreadyExists(): void
+    {
+        $registrationUserDto = new RegistrationUserDto(
+            password: new Password('password'),
+            login: 'login',
+            fullName: 'Ivanov Ivan'
+        );
+
+        $user = new User(
+            $registrationUserDto->fullName,
+            $registrationUserDto->login,
+            $registrationUserDto->password->value
+        );
+
+        $this->userRepositoryMock->method('findOneBy')->willReturn($user);
+        $this->expectException(ValidationException::class);
+        $this->authService->registration($registrationUserDto);
+    }
+
+    /**
      * @covers ::authenticate
      * @covers ::__construct
      * @covers \App\Types\Password
@@ -150,6 +177,7 @@ class AuthServiceTest extends TestCase
 
     /**
      * @covers ::authenticate
+     * @covers ::__construct
      * @covers \App\DTO\AuthenticationDto
      * @covers \App\Entity\User
      * @covers \App\Service\Auth\AuthService

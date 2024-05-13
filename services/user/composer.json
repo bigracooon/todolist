@@ -79,11 +79,15 @@
         }
     },
     "require-dev": {
+        "dama/doctrine-test-bundle": "^8.0",
+        "doctrine/doctrine-fixtures-bundle": "^3.6",
         "fakerphp/faker": "^1.23",
+        "liip/test-fixtures-bundle": "^2.9",
         "phpstan/phpstan": "^1.10",
         "phpunit/phpunit": "^9.5",
         "qossmic/deptrac-shim": "^1.0",
         "ramsey/uuid": "*",
+        "spatie/phpunit-snapshot-assertions": "^4.2",
         "symfony/browser-kit": "7.0.*",
         "symfony/css-selector": "7.0.*",
         "symfony/maker-bundle": "^1.58",

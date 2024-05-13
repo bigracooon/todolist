@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Drivers\V1\Auth;
+namespace App\Driver\V1\Auth;
 
-use App\Drivers\DriverContracts\AuthDriverContract;
+use App\Driver\DriverContracts\AuthDriverContract;
 use App\DTO\EncryptTokenDto;
 
 final readonly class JwtDriver implements AuthDriverContract
@@ -30,11 +30,6 @@ final readonly class JwtDriver implements AuthDriverContract
         $unsignedToken = $header . "." . $payload;
         $signature = hash_hmac('sha256', $unsignedToken, $this->authSecretKey);
         return $header . "." . $payload . "." . base64_encode($signature);
-    }
-
-    public function decryptAuthData(): void
-    {
-        // TODO: Implement decryptAuthData() method.
     }
 
     public function verify(string $token): bool

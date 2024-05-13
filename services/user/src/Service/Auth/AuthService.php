@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Service\Auth;
 
-use App\Drivers\DriverContracts\AuthDriverContract;
+use App\Driver\DriverContracts\AuthDriverContract;
 use App\DTO\AuthenticationDto;
 use App\DTO\EncryptTokenDto;
 use App\DTO\RegistrationUserDto;

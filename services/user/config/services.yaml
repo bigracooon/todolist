@@ -23,5 +23,5 @@ services:
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
 
-    App\Drivers\V1\Auth\JwtDriver:
+    App\Driver\V1\Auth\JwtDriver:
         $authSecretKey: '%env(AUTH_SECRET_KEY)%'

@@ -18,8 +18,6 @@ final readonly class User implements UserInterface, PasswordAuthenticatedUserInt
 {
     #[ORM\Id]
     #[ORM\Column(type: UuidType::NAME, unique: true)]
-    #[ORM\GeneratedValue(strategy: 'CUSTOM')]
-    #[ORM\CustomIdGenerator(class: 'doctrine.uuid_generator')]
     public Uuid $id;
 
     #[ORM\Column(type: 'string', length: 255)]

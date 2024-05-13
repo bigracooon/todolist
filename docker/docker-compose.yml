@@ -49,7 +49,24 @@ services:
       POSTGRES_DB: ${POSTGRES_DB}
     ports:
       - ${POSTGRES_PORT}:5432
+    volumes:
+      - postgres_data_dev:/var/lib/postgresql/data
+    networks:
+      - list
+  database_test:
+    image: postgres
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER_TEST}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD_TEST}
+      POSTGRES_DB: ${POSTGRES_DB_TEST}
+    ports:
+      - ${POSTGRES_PORT_TEST}:5432
+    volumes:
+      - postgres_data_test:/var/lib/postgresql/data
     networks:
       - list
 networks:
   list:
+volumes:
+  postgres_data_dev:
+  postgres_data_test:
