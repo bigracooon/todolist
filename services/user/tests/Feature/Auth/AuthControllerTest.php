@@ -5,13 +5,12 @@ declare(strict_types=1);
 namespace App\Tests\Feature\Auth;
 
 use App\Entity\User;
+use App\Service\Hash\HashService;
 use App\Tests\DataFixtures\UserFixtures;
+use Doctrine\ORM\EntityManagerInterface;
 use Spatie\Snapshots\MatchesSnapshots;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-use Doctrine\ORM\EntityManagerInterface;
 use Liip\TestFixturesBundle\Services\DatabaseToolCollection;
-use Liip\TestFixturesBundle\Services\DatabaseTools\AbstractDatabaseTool;
-use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 /**
  * @coversDefaultClass \App\Controller\Auth\AuthController
@@ -20,33 +19,36 @@ class AuthControllerTest extends WebTestCase
 {
     use MatchesSnapshots;
 
-    protected AbstractDatabaseTool $databaseTool;
-    protected EntityManagerInterface $entityManager;
-
-    protected function setUp(): void
-    {
-        parent::setUp();
-        $this->databaseTool = self::getContainer()->get(DatabaseToolCollection::class);
-        $this->entityManager = self::getContainer()->get(EntityManagerInterface::class);
-    }
-
     /**
      * @covers ::authenticate
+     * @covers \App\Driver\V1\Auth\JwtDriver
+     * @covers \App\Repository\UserRepository
+     * @covers \App\Request\Auth\AuthenticateRequest
+     * @covers \App\Service\Auth\AuthService
+     * @covers \App\Service\Hash\HashService
+     * @covers \App\Types\Password
      */
     public function testAuth(): void
     {
-        $this->databaseTool->get()->loadFixtures([
-            UserFixtures::class
-        ]);
+        $client = self::createClient();
 
-        $user = $this->entityManager->getRepository(User::class)->findAll();
+        /** @var DatabaseToolCollection $tool */
+        $tool = $this->getContainer()->get(DatabaseToolCollection::class);
+        $tool->get()->loadFixtures([UserFixtures::class]);
 
-        dd($user);
-        $client = static::createClient();
+        /** @var EntityManagerInterface $entityManager */
+        $entityManager = $this->getContainer()->get(EntityManagerInterface::class);
+        $userRepository = $entityManager->getRepository(User::class);
+        /** @var User $user */
+        $user = $userRepository
+            ->createQueryBuilder('u')
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getSingleResult();
 
         $client->request('POST', '/api/v1/user/auth', [
             'login' => $user->login,
-            'password' => $user->password
+            'password' => '12345678'
         ]);
 
         $this->assertResponseIsSuccessful();

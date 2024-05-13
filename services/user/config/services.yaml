@@ -25,3 +25,7 @@ services:
 
     App\Driver\V1\Auth\JwtDriver:
         $authSecretKey: '%env(AUTH_SECRET_KEY)%'
+
+    App\Tests\DataFixtures\:
+        resource: '../tests/DataFixtures'
+        tags: ['doctrine.fixture.orm']
