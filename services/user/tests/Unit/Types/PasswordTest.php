@@ -25,7 +25,7 @@ class PasswordTest extends TestCase
      * @covers ::__construct
      * @throws ValidationException
      */
-    public function testValidPassword()
+    public function testValidPassword(): void
     {
         $stringPassword = $this->faker->password(8, 16);
         $password = new Password($stringPassword);
@@ -36,7 +36,7 @@ class PasswordTest extends TestCase
      * @covers ::__construct
      * @throws ValidationException
      */
-    public function testLessThanEightCharacters()
+    public function testLessThanEightCharacters():void
     {
         $stringPassword = $this->faker->password(1, 7);
         $this->expectException(ValidationException::class);

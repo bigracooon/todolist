@@ -14,6 +14,7 @@ use App\Service\Auth\AuthService;
 use App\Service\Hash\HashServiceInterface;
 use App\Types\Password;
 use Doctrine\ORM\EntityManagerInterface;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -21,10 +22,10 @@ use PHPUnit\Framework\TestCase;
  */
 class AuthServiceTest extends TestCase
 {
-    private EntityManagerInterface $entityManagerInterfaceMock;
-    private UserRepository $userRepositoryMock;
-    private HashServiceInterface $hashServiceMock;
-    private AuthDriverContract $authDriverMock;
+    private MockObject $entityManagerInterfaceMock;
+    private MockObject $userRepositoryMock;
+    private MockObject $hashServiceMock;
+    private MockObject $authDriverMock;
     private AuthService $authService;
 
     protected function setUp(): void

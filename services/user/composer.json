@@ -67,6 +67,9 @@
         ],
         "test": [
             "vendor/bin/phpunit --coverage-text --color"
+        ],
+        "check": [
+            "bin/check"
         ]
     },
     "conflict": {
