@@ -1,0 +1,18 @@
+{
+    "version": "1.0.0",
+    "name": "balashov/checker",
+    "description": "This is package for check you project for security, tests and more.",
+    "type": "library",
+    "autoload": {
+        "psr-4": {
+            "Balashov\\Checker\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Balashov Ivan"
+        }
+    ],
+    "require": {},
+    "bin": ["bin/check"]
+}

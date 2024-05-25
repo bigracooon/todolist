@@ -23,6 +23,7 @@ services:
       dockerfile: docker/user_ms/php/Dockerfile
     volumes:
       - ./../services/user:/user
+      - ./../libs:/libs
     networks:
       - list
   admin:
@@ -38,7 +39,8 @@ services:
       context: ../
       dockerfile: docker/post_ms/php/Dockerfile
     volumes:
-      - ./../services/post:/application
+      - ./../services/post:/post
+      - ./../libs:/libs
     networks:
       - list
   database:

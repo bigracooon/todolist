@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0745146507f5cf8658fa6fee9d61bb3e",
+    "content-hash": "f735b9559e880f74b9055052c9f58e13",
     "packages": [
         {
             "name": "doctrine/cache",
@@ -5193,6 +5193,33 @@
         }
     ],
     "packages-dev": [
+        {
+            "name": "balashov/checker",
+            "version": "1.0.0",
+            "dist": {
+                "type": "path",
+                "url": "/libs/checker",
+                "reference": "9f84de1a1ae88faf48287956ed21078abff89bea"
+            },
+            "bin": [
+                "bin/check"
+            ],
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Balashov\\Checker\\": "src/"
+                }
+            },
+            "authors": [
+                {
+                    "name": "Balashov Ivan"
+                }
+            ],
+            "description": "This is package for check you project for security, tests and more.",
+            "transport-options": {
+                "relative": false
+            }
+        },
         {
             "name": "brick/math",
             "version": "0.11.0",
