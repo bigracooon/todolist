@@ -1,13 +1,15 @@
 <?php
 
-namespace App\Tests\Unit\Service\Hash;
+declare(strict_types=1);
 
-use App\Service\Hash\HashService;
-use App\Service\Hash\HashServiceInterface;
+namespace Balashov\Unit\Service;
+
+use Balashov\Auth\Service\Hash\HashService;
+use Balashov\Auth\Service\Hash\HashServiceInterface;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @coversDefaultClass \App\Service\Hash\HashService
+ * @coversDefaultClass \Balashov\Auth\Service\Hash\HashService
  */
 class HashServiceTest extends TestCase
 {

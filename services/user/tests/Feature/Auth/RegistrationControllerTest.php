@@ -16,12 +16,12 @@ class RegistrationControllerTest extends WebTestCase
 
     /**
      * @covers ::__invoke
-     * @covers \App\Driver\V1\Auth\JwtDriver
+     * @covers \Driver\V1\Auth\JwtDriver
      * @covers \App\Repository\UserRepository
      * @covers \App\Request\Auth\RegistrationUserRequest
      * @covers \App\Response\RegistrationUserResponse
      * @covers \App\Types\Password
-     * @covers \App\Service\Hash\HashService
+     * @covers \Hash\HashService
      * @covers \App\Service\Auth\AuthService
      */
     public function testRegistration(): void

@@ -1,1 +1,4 @@
 .idea
+services/user/.idea
+libs/auth/vendor
+libs/checker/vendor

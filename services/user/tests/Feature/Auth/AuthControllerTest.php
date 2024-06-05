@@ -5,12 +5,11 @@ declare(strict_types=1);
 namespace App\Tests\Feature\Auth;
 
 use App\Entity\User;
-use App\Service\Hash\HashService;
 use App\Tests\DataFixtures\UserFixtures;
 use Doctrine\ORM\EntityManagerInterface;
+use Liip\TestFixturesBundle\Services\DatabaseToolCollection;
 use Spatie\Snapshots\MatchesSnapshots;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-use Liip\TestFixturesBundle\Services\DatabaseToolCollection;
 
 /**
  * @coversDefaultClass \App\Controller\Auth\AuthController
@@ -21,11 +20,9 @@ class AuthControllerTest extends WebTestCase
 
     /**
      * @covers ::authenticate
-     * @covers \App\Driver\V1\Auth\JwtDriver
      * @covers \App\Repository\UserRepository
      * @covers \App\Request\Auth\AuthenticateRequest
      * @covers \App\Service\Auth\AuthService
-     * @covers \App\Service\Hash\HashService
      * @covers \App\Types\Password
      */
     public function testAuth(): void

@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Tests\Unit\Driver\V1\Auth;
+namespace Driver\V1\Auth;
 
-use App\Driver\V1\Auth\JwtDriver;
-use App\DTO\EncryptTokenDto;
+use Balashov\Auth\Driver\V1\Auth\JwtDriver;
+use Balashov\Auth\DTO\EncryptTokenDto;
 use PHPUnit\Framework\TestCase;
-use Symfony\Component\Uid\Uuid;
+use Ramsey\Uuid\Uuid;
 
 /**
- * @coversDefaultClass \App\Driver\V1\Auth\JwtDriver
+ * @coversDefaultClass \Balashov\Auth\Driver\V1\Auth\JwtDriver
  */
 class JwtDriverTest extends TestCase
 {
@@ -16,13 +16,14 @@ class JwtDriverTest extends TestCase
      * @return void
      * @covers ::encryptAuthData
      * @covers ::__construct
+     * @covers \Balashov\Auth\DTO\EncryptTokenDto
      * @covers ::base64url_encode
      */
     public function testEncryptAuthDataReturnsValidJwt(): void
     {
         $testSecret = 'testSecret';
         $encryptTokenDto = new EncryptTokenDto(
-            userId: Uuid::v4(),
+            userId: Uuid::uuid4()->toString(),
             login: "Test"
         );
         $jwtDriver = new JwtDriver($testSecret);

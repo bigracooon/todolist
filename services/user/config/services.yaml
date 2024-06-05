@@ -29,3 +29,8 @@ services:
     App\Tests\DataFixtures\:
         resource: '../tests/DataFixtures'
         tags: ['doctrine.fixture.orm']
+
+    Balashov\Auth\Service\Hash\HashService:
+
+    Balashov\Auth\Service\Hash\HashServiceInterface:
+        '@Balashov\Auth\Service\Hash\HashService'

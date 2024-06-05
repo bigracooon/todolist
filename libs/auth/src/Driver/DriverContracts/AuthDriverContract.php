@@ -1,8 +1,10 @@
 <?php
 
-namespace App\Driver\DriverContracts;
+declare(strict_types=1);
 
-use App\DTO\EncryptTokenDto;
+namespace Balashov\Auth\Driver\DriverContracts;
+
+use Balashov\Auth\DTO\EncryptTokenDto;
 
 interface AuthDriverContract
 {

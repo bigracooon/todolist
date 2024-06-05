@@ -7,6 +7,7 @@
         "php": ">=8.3",
         "ext-ctype": "*",
         "ext-iconv": "*",
+        "balashov/auth": "1.0.0",
         "doctrine/dbal": "^3",
         "doctrine/doctrine-bundle": "^2.12",
         "doctrine/doctrine-migrations-bundle": "^3.3",
@@ -95,12 +96,16 @@
         "symfony/css-selector": "7.0.*",
         "symfony/maker-bundle": "^1.58",
         "symfony/phpunit-bridge": "^7.0",
-        "balashov/checker": "1.0.0"
+        "balashov/checker": "^1.0.0"
     },
     "repositories": [
         {
             "type": "path",
             "url": "/libs/checker"
+        },
+        {
+            "type": "path",
+            "url": "/libs/auth"
         }
     ]
 }

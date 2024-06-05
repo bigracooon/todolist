@@ -4,8 +4,27 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f735b9559e880f74b9055052c9f58e13",
+    "content-hash": "26f055277571eb7fafd6efabcde2c548",
     "packages": [
+        {
+            "name": "balashov/auth",
+            "version": "1.0.0",
+            "dist": {
+                "type": "path",
+                "url": "/libs/auth",
+                "reference": "52c55d3f11ff1e2c57e65d34bcbd18ba37fce51b"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Balashov\\Auth\\": "src/"
+                }
+            },
+            "description": "This is package for auth between microservices",
+            "transport-options": {
+                "relative": false
+            }
+        },
         {
             "name": "doctrine/cache",
             "version": "2.2.0",
@@ -5199,7 +5218,15 @@
             "dist": {
                 "type": "path",
                 "url": "/libs/checker",
-                "reference": "9f84de1a1ae88faf48287956ed21078abff89bea"
+                "reference": "a7300b4d882c9af6df404b23327b09884a89e890"
+            },
+            "require-dev": {
+                "fakerphp/faker": "^1.23",
+                "phpstan/phpstan": "^1.10",
+                "phpunit/phpunit": "^9.5",
+                "qossmic/deptrac-shim": "^1.0",
+                "ramsey/uuid": "*",
+                "spatie/phpunit-snapshot-assertions": "^4.2"
             },
             "bin": [
                 "bin/check"

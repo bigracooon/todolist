@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\Driver\V1\Auth;
+namespace Balashov\Auth\Driver\V1\Auth;
 
-use App\Driver\DriverContracts\AuthDriverContract;
-use App\DTO\EncryptTokenDto;
+use Balashov\Auth\Driver\DriverContracts\AuthDriverContract;
+use Balashov\Auth\DTO\EncryptTokenDto;
 
 final readonly class JwtDriver implements AuthDriverContract
 {

@@ -1,6 +1,8 @@
 <?php
 
-namespace App\Service\Hash;
+declare(strict_types=1);
+
+namespace Balashov\Auth\Service\Hash;
 
 interface HashServiceInterface
 {

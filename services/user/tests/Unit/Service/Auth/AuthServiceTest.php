@@ -4,16 +4,16 @@ declare(strict_types=1);
 
 namespace App\Tests\Unit\Service\Auth;
 
-use App\Driver\DriverContracts\AuthDriverContract;
 use App\DTO\AuthenticationDto;
 use App\DTO\RegistrationUserDto;
 use App\Entity\User;
 use App\Exception\ValidationException;
 use App\Repository\UserRepository;
 use App\Service\Auth\AuthService;
-use App\Service\Hash\HashServiceInterface;
 use App\Types\Password;
+use Balashov\Auth\Service\Hash\HashServiceInterface;
 use Doctrine\ORM\EntityManagerInterface;
+use Driver\DriverContracts\AuthDriverContract;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
@@ -115,7 +115,7 @@ class AuthServiceTest extends TestCase
      * @covers \App\Types\Password
      * @covers \App\Entity\User
      * @covers \App\DTO\AuthenticationDto
-     * @covers \App\DTO\EncryptTokenDto
+     * @covers \DTO\EncryptTokenDto
      * @throws ValidationException
      */
     public function testAuthenticate(): void

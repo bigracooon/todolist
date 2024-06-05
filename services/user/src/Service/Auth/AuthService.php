@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 namespace App\Service\Auth;
 
-use App\Driver\DriverContracts\AuthDriverContract;
 use App\DTO\AuthenticationDto;
-use App\DTO\EncryptTokenDto;
 use App\DTO\RegistrationUserDto;
 use App\Entity\User;
 use App\Exception\ValidationException;
 use App\Repository\UserRepository;
-use App\Service\Hash\HashServiceInterface;
+use Balashov\Auth\Service\Hash\HashServiceInterface;
 use Doctrine\ORM\EntityManagerInterface;
+use Driver\DriverContracts\AuthDriverContract;
+use DTO\EncryptTokenDto;
 
 final readonly class AuthService implements AuthServiceInterface
 {
