@@ -1,3 +1,0 @@
-GET {{baseUrl}}/api/post
-Accept: application/json
-Content-Type: application/json
