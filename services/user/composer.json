@@ -89,7 +89,6 @@
         "liip/test-fixtures-bundle": "^2.9",
         "phpstan/phpstan": "^1.10",
         "phpunit/phpunit": "^9.5",
-        "qossmic/deptrac-shim": "^1.0",
         "ramsey/uuid": "*",
         "spatie/phpunit-snapshot-assertions": "^4.2",
         "symfony/browser-kit": "7.0.*",

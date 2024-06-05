@@ -9,10 +9,10 @@ use App\DTO\RegistrationUserDto;
 use App\Entity\User;
 use App\Exception\ValidationException;
 use App\Repository\UserRepository;
+use Balashov\Auth\Driver\DriverContracts\AuthDriverContract;
+use Balashov\Auth\DTO\EncryptTokenDto;
 use Balashov\Auth\Service\Hash\HashServiceInterface;
 use Doctrine\ORM\EntityManagerInterface;
-use Driver\DriverContracts\AuthDriverContract;
-use DTO\EncryptTokenDto;
 
 final readonly class AuthService implements AuthServiceInterface
 {
@@ -72,7 +72,7 @@ final readonly class AuthService implements AuthServiceInterface
         }
 
         $payloadTokenDto = new EncryptTokenDto(
-            $user->id,
+            $user->id->toRfc4122(),
             $user->login
         );
 

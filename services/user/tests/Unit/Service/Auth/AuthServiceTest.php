@@ -11,11 +11,12 @@ use App\Exception\ValidationException;
 use App\Repository\UserRepository;
 use App\Service\Auth\AuthService;
 use App\Types\Password;
-use Balashov\Auth\Service\Hash\HashServiceInterface;
 use Doctrine\ORM\EntityManagerInterface;
-use Driver\DriverContracts\AuthDriverContract;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
+use Balashov\Auth\Driver\DriverContracts\AuthDriverContract;
+use Balashov\Auth\Service\Hash\HashServiceInterface;
+
 
 /**
  * @coversDefaultClass \App\Service\Auth\AuthService
@@ -115,7 +116,6 @@ class AuthServiceTest extends TestCase
      * @covers \App\Types\Password
      * @covers \App\Entity\User
      * @covers \App\DTO\AuthenticationDto
-     * @covers \DTO\EncryptTokenDto
      * @throws ValidationException
      */
     public function testAuthenticate(): void

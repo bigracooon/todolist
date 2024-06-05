@@ -1,14 +1,37 @@
 #!/bin/bash
 
-# Define color
+# Define colors
 BLUE='\033[0;34m'
+RED='\033[0;31m'
 NC='\033[0m' # No Color
 
+# Function to check if a file exists
+check_file() {
+    if [ ! -f "$1" ]; then
+        echo -e "${RED}[ERROR] File $1 not found. Skipping...${NC}"
+        return 1
+    fi
+    return 0
+}
+
+# Function to check if a command exists
+check_command() {
+    if ! command -v "$1" &> /dev/null; then
+        echo -e "${RED}[ERROR] Command $1 not found. Skipping...${NC}"
+        return 1
+    fi
+    return 0
+}
+
 echo -e "${BLUE}[AUDIT]${NC}"
-composer audit
+check_command "composer" && composer audit
 
 echo -e "${BLUE}[TESTS]${NC}"
-vendor/bin/phpunit --coverage-text --color
+if check_file "vendor/bin/phpunit" && check_file "phpunit.xml"; then
+    vendor/bin/phpunit --coverage-text --color
+fi
 
 echo -e "${BLUE}[PHPSTAN]${NC}"
-vendor/bin/phpstan analyse src tests -c phpstan.neon
+if check_file "vendor/bin/phpstan" && check_file "phpstan.neon"; then
+    vendor/bin/phpstan analyse src tests -c phpstan.neon
+fi

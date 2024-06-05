@@ -23,14 +23,19 @@ services:
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
 
-    App\Driver\V1\Auth\JwtDriver:
+
+    Balashov\Auth\Driver\V1\Auth\JwtDriver:
         $authSecretKey: '%env(AUTH_SECRET_KEY)%'
 
     App\Tests\DataFixtures\:
         resource: '../tests/DataFixtures'
         tags: ['doctrine.fixture.orm']
 
+    # services register
     Balashov\Auth\Service\Hash\HashService:
 
     Balashov\Auth\Service\Hash\HashServiceInterface:
         '@Balashov\Auth\Service\Hash\HashService'
+
+    Balashov\Auth\Driver\DriverContracts\AuthDriverContract:
+        '@Balashov\Auth\Driver\V1\Auth\JwtDriver'

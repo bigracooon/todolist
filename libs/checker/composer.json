@@ -3,24 +3,20 @@
     "name": "balashov/checker",
     "description": "This is package for check you project for security, tests and more.",
     "type": "library",
-    "autoload": {
-        "psr-4": {
-            "Balashov\\Checker\\": "src/"
-        }
-    },
     "authors": [
         {
             "name": "Balashov Ivan"
         }
     ],
-    "require": {},
-    "require-dev": {
+    "require": {
         "fakerphp/faker": "^1.23",
         "phpstan/phpstan": "^1.10",
         "phpunit/phpunit": "^9.5",
-        "qossmic/deptrac-shim": "^1.0",
         "ramsey/uuid": "*",
-        "spatie/phpunit-snapshot-assertions": "^4.2"
+        "spatie/phpunit-snapshot-assertions": "^4.2",
+        "qossmic/deptrac": "^2.0"
     },
-    "bin": ["bin/check"]
+    "bin": [
+        "bin/check"
+    ]
 }
