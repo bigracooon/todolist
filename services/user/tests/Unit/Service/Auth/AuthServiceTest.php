@@ -17,7 +17,6 @@ use PHPUnit\Framework\TestCase;
 use Balashov\Auth\Driver\DriverContracts\AuthDriverContract;
 use Balashov\Auth\Service\Hash\HashServiceInterface;
 
-
 /**
  * @coversDefaultClass \App\Service\Auth\AuthService
  */

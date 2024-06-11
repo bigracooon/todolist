@@ -4,22 +4,20 @@ namespace Driver\V1\Auth;
 
 use Balashov\Auth\Driver\V1\Auth\JwtDriver;
 use Balashov\Auth\DTO\EncryptTokenDto;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Test;
+use PHPUnit\Framework\Attributes\UsesClass;
 use PHPUnit\Framework\TestCase;
 use Ramsey\Uuid\Uuid;
 
-/**
- * @coversDefaultClass \Balashov\Auth\Driver\V1\Auth\JwtDriver
- */
+#[
+    CoversClass(JwtDriver::class),
+    UsesClass(EncryptTokenDto::class)
+]
 class JwtDriverTest extends TestCase
 {
-    /**
-     * @return void
-     * @covers ::encryptAuthData
-     * @covers ::__construct
-     * @covers \Balashov\Auth\DTO\EncryptTokenDto
-     * @covers ::base64url_encode
-     */
-    public function testEncryptAuthDataReturnsValidJwt(): void
+    #[Test]
+    public function encryptAuthDataReturnsValidJwt(): void
     {
         $testSecret = 'testSecret';
         $encryptTokenDto = new EncryptTokenDto(
@@ -36,12 +34,8 @@ class JwtDriverTest extends TestCase
         $this->assertMatchesRegularExpression('/^[a-zA-Z0-9-_+=\/]*$/', $parts[2]);
     }
 
-    /**
-     * @return void
-     * @covers ::verify
-     * @covers ::__construct
-     */
-    public function testVerifyMethod(): void
+    #[Test]
+    public function verifyMethod(): void
     {
         $jwtDriver = new JwtDriver('testSecret');
         $jwtToken = 'test.jwt.token';

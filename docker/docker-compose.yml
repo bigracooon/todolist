@@ -26,23 +26,15 @@ services:
       - ./../libs:/libs
     networks:
       - list
-#  admin:
-#    build:
-#      context: ../
-#      dockerfile: docker/admin/php/Dockerfile
-#    volumes:
-#      - ./../services/admin:/admin
-#    networks:
-#      - list
-#  post:
-#    build:
-#      context: ../
-#      dockerfile: docker/post_ms/php/Dockerfile
-#    volumes:
-#      - ./../services/post:/post
-#      - ./../libs:/libs
-#    networks:
-#      - list
+  post:
+    build:
+      context: ../
+      dockerfile: docker/post_ms/php/Dockerfile
+    volumes:
+      - ./../services/post:/post
+      - ./../libs:/libs
+    networks:
+      - list
   database:
     image: postgres
     environment:

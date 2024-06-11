@@ -4,13 +4,18 @@ declare(strict_types=1);
 
 namespace Balashov\Unit\Service;
 
+use Balashov\Auth\DTO\EncryptTokenDto;
 use Balashov\Auth\Service\Hash\HashService;
 use Balashov\Auth\Service\Hash\HashServiceInterface;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Test;
+use PHPUnit\Framework\Attributes\UsesClass;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @coversDefaultClass \Balashov\Auth\Service\Hash\HashService
- */
+#[
+    CoversClass(HashService::class),
+    UsesClass(EncryptTokenDto::class)
+]
 class HashServiceTest extends TestCase
 {
     private HashServiceInterface $hashService;
@@ -26,7 +31,8 @@ class HashServiceTest extends TestCase
     /**
      * @covers ::hash
      */
-    public function testHash(): void
+    #[Test]
+    public function hash(): void
     {
         $hashedPassword = $this->hashService->hash($this->secretPassword);
 
@@ -37,7 +43,8 @@ class HashServiceTest extends TestCase
     /**
      * @covers ::verify
      */
-    public function testVerify(): void
+    #[Test]
+    public function verify(): void
     {
         $hashedPassword = password_hash($this->secretPassword, PASSWORD_DEFAULT);
         $this->assertTrue($this->hashService->verify($this->secretPassword, $hashedPassword));

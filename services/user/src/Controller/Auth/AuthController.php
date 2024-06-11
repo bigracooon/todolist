@@ -16,7 +16,6 @@ use Symfony\Component\Routing\Attribute\Route;
 
 final class AuthController extends AbstractController
 {
-
     /**
      * @throws ValidationException
      */
@@ -28,8 +27,7 @@ final class AuthController extends AbstractController
     public function authenticate(
         #[MapRequestPayload] AuthenticateRequest $authenticateRequest,
         AuthService                              $authService
-    ): JsonResponse
-    {
+    ): JsonResponse {
         $dto = new AuthenticationDto(
             login: $authenticateRequest->login,
             password: new Password($authenticateRequest->password),

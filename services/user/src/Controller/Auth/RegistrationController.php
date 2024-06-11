@@ -28,8 +28,7 @@ final class RegistrationController extends AbstractController
     public function __invoke(
         #[MapRequestPayload] RegistrationUserRequest $registrationUserRequest,
         AuthService                                  $authService
-    ): JsonResponse
-    {
+    ): JsonResponse {
         $registrationUserDto = new RegistrationUserDto(
             password: new Password($registrationUserRequest->password),
             login: $registrationUserRequest->login,

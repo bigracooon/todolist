@@ -35,3 +35,8 @@ echo -e "${BLUE}[PHPSTAN]${NC}"
 if check_file "vendor/bin/phpstan" && check_file "phpstan.neon"; then
     vendor/bin/phpstan analyse src tests -c phpstan.neon
 fi
+
+echo -e "${BLUE}[PHPCS]${NC}"
+if check_file "vendor/bin/phpcs" && check_file "phpcs.xml"; then
+    vendor/bin/phpcs -p --colors
+fi

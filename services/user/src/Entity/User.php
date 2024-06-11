@@ -39,8 +39,7 @@ final readonly class User implements UserInterface, PasswordAuthenticatedUserInt
         string $fullname,
         string $login,
         string $password
-    )
-    {
+    ) {
         $this->id = Uuid::v4();
         $this->fullname = $fullname;
         $this->login = $login;

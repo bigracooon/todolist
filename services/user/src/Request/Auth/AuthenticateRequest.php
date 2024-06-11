@@ -10,7 +10,6 @@ final readonly class AuthenticateRequest
         #[Assert\NotBlank(message: "Field login required")]
         #[Assert\Type('string')]
         public string $login,
-
         #[Assert\NotBlank(message: "Field password required")]
         #[Assert\Type('string')]
         public string $password,

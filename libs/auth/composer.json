@@ -10,12 +10,17 @@
     },
     "require": {
         "ramsey/uuid": "^4.7",
-        "balashov/checker": "^1.0"
+        "balashov/checker": "^2.0"
     },
     "repositories": [
         {
             "type": "path",
             "url": "/libs/checker"
         }
-    ]
+    ],
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        }
+    }
 }

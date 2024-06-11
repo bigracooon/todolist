@@ -12,15 +12,12 @@ final readonly class RegistrationUserRequest
         #[Assert\NotBlank(message: "Field fullname required")]
         #[Assert\Type('string')]
         public string $fullname,
-
         #[Assert\NotBlank(message: "Field login required")]
         #[Assert\Type('string')]
         public string $login,
-
         #[Assert\NotBlank(message: "Field login required")]
         #[Assert\Type('string')]
         public string $password,
     ) {
-
     }
 }
