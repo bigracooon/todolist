@@ -6,11 +6,10 @@ use App\Exception\ValidationException;
 use App\Types\Password;
 use Faker\Factory;
 use Faker\Generator;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @coversDefaultClass \App\Types\Password
- */
+#[CoversClass(Password::class)]
 class PasswordTest extends TestCase
 {
     private Generator $faker;
@@ -22,7 +21,6 @@ class PasswordTest extends TestCase
     }
 
     /**
-     * @covers ::__construct
      * @throws ValidationException
      */
     public function testValidPassword(): void
@@ -33,7 +31,6 @@ class PasswordTest extends TestCase
     }
 
     /**
-     * @covers ::__construct
      * @throws ValidationException
      */
     public function testLessThanEightCharacters(): void

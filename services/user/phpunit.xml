@@ -2,6 +2,7 @@
 <phpunit
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/11.2/phpunit.xsd"
+        bootstrap="tests/bootstrap.php"
         cacheResult="false"
         executionOrder="depends,defects"
         beStrictAboutOutputDuringTests="true"
@@ -18,7 +19,7 @@
         </testsuite>
     </testsuites>
     <php>
-        <server name="APP_ENV" value="test"/>
+        <server name="APP_ENV" value="test" force="true"/>
     </php>
     <source>
         <include>
@@ -36,6 +37,7 @@
               disableCodeCoverageIgnore="true">
     </coverage>
     <extensions>
-        <extension class="DAMA\DoctrineTestBundle\PHPUnit\PHPUnitExtension"/>
+        <bootstrap class="DAMA\DoctrineTestBundle\PHPUnit\PHPUnitExtension">
+        </bootstrap>
     </extensions>
 </phpunit>

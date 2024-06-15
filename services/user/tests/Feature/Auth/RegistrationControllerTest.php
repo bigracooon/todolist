@@ -4,24 +4,16 @@ declare(strict_types=1);
 
 namespace App\Tests\Feature\Auth;
 
+use App\Controller\Auth\RegistrationController;
+use PHPUnit\Framework\Attributes\CoversClass;
 use Spatie\Snapshots\MatchesSnapshots;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-/**
- * @coversDefaultClass \App\Controller\Auth\RegistrationController
- */
+#[CoversClass(RegistrationController::class)]
 class RegistrationControllerTest extends WebTestCase
 {
     use MatchesSnapshots;
 
-    /**
-     * @covers ::__invoke
-     * @covers \App\Repository\UserRepository
-     * @covers \App\Request\Auth\RegistrationUserRequest
-     * @covers \App\Response\RegistrationUserResponse
-     * @covers \App\Types\Password
-     * @covers \App\Service\Auth\AuthService
-     */
     public function testRegistration(): void
     {
         $client = static::createClient();
