@@ -1,0 +1,5 @@
+### Get posts
+GET http://localhost:8069/api/posts
+Accept: application/json
+Content-Type: application/json
+
