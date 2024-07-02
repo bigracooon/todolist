@@ -10,6 +10,7 @@
         "laravel/tinker": "^2.9"
     },
     "require-dev": {
+        "balashov/checker": "^2.0",
         "fakerphp/faker": "^1.23",
         "laravel/pint": "^1.13",
         "laravel/sail": "^1.26",
@@ -17,6 +18,16 @@
         "nunomaduro/collision": "^8.0",
         "phpunit/phpunit": "^11.0.1"
     },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "/libs/checker"
+        },
+        {
+            "type": "path",
+            "url": "/libs/auth"
+        }
+    ],
     "autoload": {
         "psr-4": {
             "App\\": "app/",
