@@ -5,7 +5,7 @@ services:
     volumes:
       - ./templates:/etc/nginx/templates
       - ./../services/user:/user
-      - ./../services/post:/post
+      - ./../services/issue:/issue
       - ./../services/admin:/admin
     ports:
       - "${NGINX_EXTERNAL_PORT_USER}:${NGINX_INTERNAL_PORT_USER}"
@@ -26,12 +26,12 @@ services:
       - ./../libs:/libs
     networks:
       - list
-  post:
+  issue:
     build:
       context: ../
-      dockerfile: docker/post_ms/php/Dockerfile
+      dockerfile: docker/issue_ms/php/Dockerfile
     volumes:
-      - ./../services/post:/post
+      - ./../services/issue:/issue
       - ./../libs:/libs
     networks:
       - list

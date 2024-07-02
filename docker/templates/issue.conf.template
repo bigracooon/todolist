@@ -5,7 +5,7 @@ server {
 
     access_log /var/log/nginx/application.access.log;
 
-    root /post/public;
+    root /issue/public;
     index index.html index.htm index.php;
 
     charset utf-8;
@@ -31,7 +31,7 @@ server {
            set $phphttps 'on';
         }
         fastcgi_param HTTPS $phphttps;
-        set $app "post:9000";
+        set $app "issue:9000";
 
         fastcgi_pass $app;
         fastcgi_index index.php;

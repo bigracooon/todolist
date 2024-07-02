@@ -1,6 +1,6 @@
 FROM php:8.3-fpm
 
-WORKDIR "/post"
+WORKDIR "/issue"
 
 ARG DOCKER_GID=1000
 ARG DOCKER_UID=1000
@@ -46,6 +46,6 @@ RUN useradd -g $DOCKER_GID -u $DOCKER_UID dev
 RUN mkdir /home/dev
 RUN chown -R dev:dev /home/dev
 
-COPY services/post /post
+COPY services/issue /issue
 
 USER dev
