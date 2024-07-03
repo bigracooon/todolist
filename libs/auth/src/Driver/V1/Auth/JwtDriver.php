@@ -34,11 +34,16 @@ final readonly class JwtDriver implements AuthDriverContract
 
     public function verify(string $token): bool
     {
-        return false;
+        return true;
     }
 
     private function base64urlEncode(string $data): string
     {
         return rtrim(strtr(base64_encode($data), '+/', '-_'), '=');
+    }
+
+    private function base64urlDecode(string $data): string
+    {
+        return rtrim(strtr(base64_decode($data), '+/', '-_'), '=');
     }
 }

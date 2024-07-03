@@ -1,0 +1,4 @@
+### Get Issues
+GET {{baseUrl}}/api/v1/issues?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCIsImV4cCI6MTcyMDAyMjE0OX0.eyJ1c2VySWQiOiJhZmY3NTIxMy0zZDgzLTQzMWMtYjQ5MS05MGQxNWQwYzNiOWIiLCJsb2dpbiI6ImJpZ3JhY29vb241NDQifQ.YWVlNjIzMTA3YWVmNmI5YjRhZTE2YjkxNWM4MjYxOGZhYzNiNTIzZmVlYmFmZTc4NjgzMjBlYjAyYmZkNzc2OA==
+Accept: application/json
+Content-Type: application/json

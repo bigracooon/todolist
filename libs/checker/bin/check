@@ -33,7 +33,7 @@ fi
 
 echo -e "${BLUE}[PHPSTAN]${NC}"
 if check_file "vendor/bin/phpstan" && check_file "phpstan.neon"; then
-    vendor/bin/phpstan analyse src tests -c phpstan.neon
+    vendor/bin/phpstan analyse -c phpstan.neon
 fi
 
 echo -e "${BLUE}[PHPCS]${NC}"
