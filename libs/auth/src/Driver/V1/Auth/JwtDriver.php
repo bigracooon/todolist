@@ -34,16 +34,22 @@ final readonly class JwtDriver implements AuthDriverContract
 
     public function verify(string $token): bool
     {
-        return true;
+        [$header, $payload, $signature] = explode(".", $token);
+
+        $header = base64_decode($header);
+        $payload = base64_decode($payload);
+        $signatureProvided = base64_decode($signature);
+
+        $base64UrlHeader = $this->base64urlEncode($header);
+        $base64UrlPayload = $this->base64urlEncode($payload);
+
+        $signature = hash_hmac('sha256', $base64UrlHeader . "." . $base64UrlPayload, $this->authSecretKey);
+
+        return ($signature === $signatureProvided);
     }
 
     private function base64urlEncode(string $data): string
     {
         return rtrim(strtr(base64_encode($data), '+/', '-_'), '=');
-    }
-
-    private function base64urlDecode(string $data): string
-    {
-        return rtrim(strtr(base64_decode($data), '+/', '-_'), '=');
     }
 }

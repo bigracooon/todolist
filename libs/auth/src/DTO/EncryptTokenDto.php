@@ -12,12 +12,10 @@ final readonly class EncryptTokenDto
     /**
      * @param string $userId
      * @param string $login
-     * @param string|null $fuckYou
      */
     public function __construct(
         public string $userId,
         public string $login,
-        public ?string $fuckYou = null,
     ) {
     }
 }

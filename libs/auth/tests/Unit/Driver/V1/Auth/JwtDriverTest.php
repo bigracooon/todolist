@@ -35,10 +35,28 @@ class JwtDriverTest extends TestCase
     }
 
     #[Test]
-    public function verifyMethod(): void
+    public function verify(): void
     {
-        $jwtDriver = new JwtDriver('testSecret');
-        $jwtToken = 'test.jwt.token';
-        $this->assertFalse($jwtDriver->verify($jwtToken));
+        $testSecret = 'testSecret';
+
+        $jwtDriver = new JwtDriver($testSecret);
+
+        $encryptTokenDto = new EncryptTokenDto(
+            userId: Uuid::uuid4()->toString(),
+            login: "Test"
+        );
+
+        $hash = $jwtDriver->encryptAuthData($encryptTokenDto);
+
+        $this->assertTrue($jwtDriver->verify($hash));
+    }
+
+    #[Test]
+    public function notVerified(): void
+    {
+        $testSecret = 'testSecret';
+        $invalidHash = 'invalidHash.invalidHash.invalidHash';
+        $jwtDriver = new JwtDriver($testSecret);
+        $this->assertFalse($jwtDriver->verify($invalidHash));
     }
 }
