@@ -23,20 +23,64 @@ check_command() {
     return 0
 }
 
-echo -e "${BLUE}[AUDIT]${NC}"
-check_command "composer" && composer audit
+# Parse flags
+AUDIT=false
+TESTS=false
+PHPSTAN=false
+PHPCS=false
+RUN_ALL=true
 
-echo -e "${BLUE}[TESTS]${NC}"
-if check_file "vendor/bin/phpunit" && check_file "phpunit.xml"; then
-    vendor/bin/phpunit --coverage-text --color
+for arg in "$@"
+do
+    case $arg in
+        --audit)
+        AUDIT=true
+        RUN_ALL=false
+        shift
+        ;;
+        --tests)
+        TESTS=true
+        RUN_ALL=false
+        shift
+        ;;
+        --phpstan)
+        PHPSTAN=true
+        RUN_ALL=false
+        shift
+        ;;
+        --phpcs)
+        PHPCS=true
+        RUN_ALL=false
+        shift
+        ;;
+        *)
+        echo -e "${RED}[ERROR] Invalid flag $arg. Skipping...${NC}"
+        ;;
+    esac
+done
+
+if $RUN_ALL || $AUDIT; then
+    echo -e "${BLUE}[AUDIT]${NC}"
+    check_command "composer" && composer audit
 fi
 
-echo -e "${BLUE}[PHPSTAN]${NC}"
-if check_file "vendor/bin/phpstan" && check_file "phpstan.neon"; then
-    vendor/bin/phpstan analyse -c phpstan.neon
+if $RUN_ALL || $TESTS; then
+    echo -e "${BLUE}[TESTS]${NC}"
+    if check_file "vendor/bin/phpunit" && check_file "phpunit.xml"; then
+        vendor/bin/phpunit --coverage-text --color
+    fi
 fi
 
-echo -e "${BLUE}[PHPCS]${NC}"
-if check_file "vendor/bin/phpcs" && check_file "phpcs.xml"; then
-    vendor/bin/phpcs -p --colors
+if $RUN_ALL || $PHPSTAN; then
+    echo -e "${BLUE}[PHPSTAN]${NC}"
+    if check_file "vendor/bin/phpstan" && check_file "phpstan.neon"; then
+        vendor/bin/phpstan analyse -c phpstan.neon
+    fi
+fi
+
+if $RUN_ALL || $PHPCS; then
+    echo -e "${BLUE}[PHPCS]${NC}"
+    if check_file "vendor/bin/phpcs" && check_file "phpcs.xml"; then
+        vendor/bin/phpcs -p --colors
+    fi
 fi

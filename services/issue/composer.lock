@@ -31,11 +31,11 @@
         },
         {
             "name": "balashov/checker",
-            "version": "2.0.0",
+            "version": "2.0.1",
             "dist": {
                 "type": "path",
                 "url": "/libs/checker",
-                "reference": "c27f544717a7d9d5f98dc39a8de3cf1e174b4b73"
+                "reference": "80b3b1a010502441e5a4f8c2a3b1a4dfc8d4b9d6"
             },
             "require": {
                 "fakerphp/faker": "^1.23",
