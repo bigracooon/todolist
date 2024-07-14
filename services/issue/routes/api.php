@@ -6,6 +6,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware(AuthMiddleware::class)->group(function () {
     Route::prefix('v1')->group(function () {
-        Route::get('issues', [IssueController::class, 'index']);
+        Route::get('issues', [IssueController::class, 'index'])->name('issues.index');
     });
 });

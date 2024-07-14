@@ -7,7 +7,7 @@ use App\Contracts\Service\IssueServiceContract;
 use App\Service\IssueService;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\MockObject\Exception;
-use PHPUnit\Framework\TestCase;
+use Tests\TestCase;
 
 class IssueServiceTest extends TestCase
 {
@@ -19,13 +19,13 @@ class IssueServiceTest extends TestCase
      */
     protected function setUp(): void
     {
+        parent::setUp();
         $this->issue = $this->createMock(IssueContract::class);
         $this->issueService = new IssueService($this->issue);
-        parent::setUp();
     }
 
     #[Test]
-    public function getIssues()
+    public function getIssues(): void
     {
         $this->issue->expects($this->once())->method('getAll');
         $this->issueService->getIssues();
