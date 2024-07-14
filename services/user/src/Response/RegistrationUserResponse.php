@@ -14,15 +14,15 @@ final readonly class RegistrationUserResponse implements ResponseInterface
 
     /**
      * @return array{
-     *     'login':string,
-     *     'password': string
+     *     'fullname': string,
+     *     'login': string
      * }
      */
     public function getData(): array
     {
         return [
-            'login' => $this->fullname,
-            'password' => $this->login
+            'fullname' => $this->fullname,
+            'login' => $this->login
         ];
     }
 }

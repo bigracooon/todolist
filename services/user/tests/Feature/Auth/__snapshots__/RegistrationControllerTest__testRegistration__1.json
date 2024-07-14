@@ -1,4 +1,4 @@
 {
-    "login": "Test Full Name",
-    "password": "testLogin"
+    "fullname": "Test Full Name",
+    "login": "testLogin"
 }

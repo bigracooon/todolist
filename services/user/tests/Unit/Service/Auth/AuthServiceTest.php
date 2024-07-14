@@ -13,13 +13,17 @@ use App\Service\Auth\AuthService;
 use App\Types\Password;
 use Doctrine\ORM\EntityManagerInterface;
 use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\UsesClass;
 use PHPUnit\Framework\MockObject\Exception;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Balashov\Auth\Driver\DriverContracts\AuthDriverContract;
 use Balashov\Auth\Service\Hash\HashServiceInterface;
 
-#[CoversClass(AuthService::class)]
+#[
+    CoversClass(AuthService::class),
+    UsesClass(Password::class)
+]
 class AuthServiceTest extends TestCase
 {
     private MockObject $entityManagerInterfaceMock;

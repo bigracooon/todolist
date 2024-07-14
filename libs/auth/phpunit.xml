@@ -30,8 +30,4 @@
             <directory>src/DTO</directory>
         </exclude>
     </source>
-    <coverage includeUncoveredFiles="true"
-              ignoreDeprecatedCodeUnits="true"
-              disableCodeCoverageIgnore="true">
-    </coverage>
 </phpunit>

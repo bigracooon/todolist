@@ -20,7 +20,7 @@
     </testsuites>
     <coverage>
         <report>
-            <text outputFile="storage/logs/coverage.txt" showUncoveredFiles="true"/>
+            <text outputFile="var/log/coverage.txt" showUncoveredFiles="true"/>
         </report>
     </coverage>
     <php>
@@ -35,12 +35,11 @@
             <directory>tests</directory>
             <directory>src/Entity</directory>
             <directory>src/DTO</directory>
+            <directory>src/Request</directory>
+            <directory>src/Response</directory>
+            <directory>src/Repository</directory>
         </exclude>
     </source>
-    <coverage includeUncoveredFiles="true"
-              ignoreDeprecatedCodeUnits="true"
-              disableCodeCoverageIgnore="true">
-    </coverage>
     <extensions>
         <bootstrap class="DAMA\DoctrineTestBundle\PHPUnit\PHPUnitExtension">
         </bootstrap>
