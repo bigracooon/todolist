@@ -39,3 +39,10 @@ services:
 
     Balashov\Auth\Driver\DriverContracts\AuthDriverContract:
         '@Balashov\Auth\Driver\V1\Auth\JwtDriver'
+
+    App\EventListener\Http\TokenListener:
+        tags:
+            - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
+    App\EventListener\Http\HandleResponseListener:
+        tags:
+            - {name: kernel.event_listener, event: kernel.response}

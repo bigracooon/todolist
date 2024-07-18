@@ -4,18 +4,18 @@ declare(strict_types=1);
 
 namespace App\Controller\Auth;
 
+use App\Controller\BaseAbstractController;
 use App\DTO\RegistrationUserDto;
 use App\Exception\ValidationException;
 use App\Request\Auth\RegistrationUserRequest;
 use App\Response\RegistrationUserResponse;
 use App\Service\Auth\AuthService;
 use App\Types\Password;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpKernel\Attribute\MapRequestPayload;
 use Symfony\Component\Routing\Attribute\Route;
 
-final class RegistrationController extends AbstractController
+final class RegistrationController extends BaseAbstractController
 {
     /**
      * @throws ValidationException

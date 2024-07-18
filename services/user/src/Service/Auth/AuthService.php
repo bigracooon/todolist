@@ -21,7 +21,8 @@ final readonly class AuthService implements AuthServiceInterface
         private UserRepository         $userRepository,
         private HashServiceInterface   $hashService,
         private AuthDriverContract     $authDriver,
-    ) {
+    )
+    {
     }
 
     /**
@@ -77,5 +78,10 @@ final readonly class AuthService implements AuthServiceInterface
         );
 
         return $this->authDriver->encryptAuthData($payloadTokenDto);
+    }
+
+    public function verify(string $token): bool
+    {
+        return $this->authDriver->verify($token);
     }
 }

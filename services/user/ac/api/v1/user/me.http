@@ -1,0 +1,4 @@
+### Get me information
+GET {{baseUrl}}/api/v1/user/me
+Accept: application/json
+Content-Type: application/json

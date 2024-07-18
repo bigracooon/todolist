@@ -9,4 +9,5 @@ interface AuthServiceInterface
 {
     public function registration(RegistrationUserDto $dto): void;
     public function authenticate(AuthenticationDto $dto): string;
+    public function verify(string $token): bool;
 }
