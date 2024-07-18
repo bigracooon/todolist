@@ -83,6 +83,7 @@
         }
     },
     "require-dev": {
+        "balashov/checker": "dev-main",
         "dama/doctrine-test-bundle": "^8.0",
         "doctrine/doctrine-fixtures-bundle": "^3.6",
         "fakerphp/faker": "^1.23",
@@ -91,13 +92,12 @@
         "symfony/browser-kit": "7.0.*",
         "symfony/css-selector": "7.0.*",
         "symfony/maker-bundle": "^1.58",
-        "symfony/phpunit-bridge": "^7.0",
-        "balashov/checker": "^2.0.0"
+        "symfony/phpunit-bridge": "^7.0"
     },
     "repositories": [
         {
-            "type": "path",
-            "url": "/libs/checker"
+            "type": "vcs",
+            "url": "https://github.com/bigracooon/checker.git"
         },
         {
             "type": "path",

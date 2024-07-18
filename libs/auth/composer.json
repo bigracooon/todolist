@@ -9,8 +9,7 @@
         }
     },
     "require": {
-        "ramsey/uuid": "^4.7",
-        "balashov/checker": "^2.0"
+        "ramsey/uuid": "^4.7"
     },
     "repositories": [
         {
