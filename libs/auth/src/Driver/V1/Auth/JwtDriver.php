@@ -34,6 +34,10 @@ final readonly class JwtDriver implements AuthDriverContract
 
     public function verify(string $token): bool
     {
+        if (count(explode(".", $token)) !== 3) {
+            return false;
+        }
+
         [$header, $payload, $signature] = explode(".", $token);
 
         $header = base64_decode($header);

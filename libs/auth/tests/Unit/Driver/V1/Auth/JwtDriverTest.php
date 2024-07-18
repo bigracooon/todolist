@@ -19,7 +19,7 @@ class JwtDriverTest extends TestCase
     #[Test]
     public function encryptAuthDataReturnsValidJwt(): void
     {
-        $testSecret = 'testSecret';
+        $testSecret = '8f6eb96b-4f03-4d14-aa34-e538600151fd';
         $encryptTokenDto = new EncryptTokenDto(
             userId: Uuid::uuid4()->toString(),
             login: "Test"
@@ -37,7 +37,7 @@ class JwtDriverTest extends TestCase
     #[Test]
     public function verify(): void
     {
-        $testSecret = 'testSecret';
+        $testSecret = 'bb24e484-494a-4225-9d6f-0cd524e3194c';
 
         $jwtDriver = new JwtDriver($testSecret);
 
@@ -54,8 +54,8 @@ class JwtDriverTest extends TestCase
     #[Test]
     public function notVerified(): void
     {
-        $testSecret = 'testSecret';
-        $invalidHash = 'invalidHash.invalidHash.invalidHash';
+        $testSecret = '33222577-2253-4c56-b725-46042e825978';
+        $invalidHash = '27af0756-6102-4b11-8ccd-466f3cabb5cf';
         $jwtDriver = new JwtDriver($testSecret);
         $this->assertFalse($jwtDriver->verify($invalidHash));
     }
