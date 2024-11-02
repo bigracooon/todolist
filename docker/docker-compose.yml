@@ -1,66 +1,78 @@
 version: "3"
 services:
-  nginx:
-    image: nginx:latest
-    volumes:
-      - ./templates:/etc/nginx/templates
-      - ./../services/user:/user
-      - ./../services/issue:/issue
-      - ./../services/admin:/admin
-    ports:
-      - "${NGINX_EXTERNAL_PORT_USER}:${NGINX_INTERNAL_PORT_USER}"
-      - "${NGINX_EXTERNAL_PORT_POST}:${NGINX_INTERNAL_PORT_POST}"
-      - "${NGINX_EXTERNAL_PORT_ADMIN}:${NGINX_INTERNAL_PORT_ADMIN}"
-    environment:
-      - NGINX_PORT_USER=${NGINX_INTERNAL_PORT_USER}
-      - NGINX_PORT_POST=${NGINX_INTERNAL_PORT_POST}
-      - NGINX_PORT_ADMIN=${NGINX_INTERNAL_PORT_ADMIN}
-    networks:
-      - list
-  user:
-    build:
-      context: ../
-      dockerfile: docker/user_ms/php/Dockerfile
-    volumes:
-      - ./../services/user:/user
-      - ./../libs:/libs
-    networks:
-      - list
-  issue:
-    build:
-      context: ../
-      dockerfile: docker/issue_ms/php/Dockerfile
-    volumes:
-      - ./../services/issue:/issue
-      - ./../libs:/libs
-    networks:
-      - list
-  database:
-    image: postgres
-    environment:
-      POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-      POSTGRES_DB: ${POSTGRES_DB}
-    ports:
-      - ${POSTGRES_PORT}:5432
-    volumes:
-      - postgres_data_dev:/var/lib/postgresql/data
-    networks:
-      - list
-  database_test:
-    image: postgres
-    environment:
-      POSTGRES_USER: ${POSTGRES_USER_TEST}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD_TEST}
-      POSTGRES_DB: ${POSTGRES_DB_TEST}
-    ports:
-      - ${POSTGRES_PORT_TEST}:5432
-    volumes:
-      - postgres_data_test:/var/lib/postgresql/data
-    networks:
-      - list
+    nginx:
+        image: nginx:latest
+        volumes:
+            - ./templates:/etc/nginx/templates
+            - ./../services/user:/user
+            - ./../services/issue:/issue
+            - ./../services/admin:/admin
+        ports:
+            - "${NGINX_EXTERNAL_PORT_USER}:${NGINX_INTERNAL_PORT_USER}"
+            - "${NGINX_EXTERNAL_PORT_POST}:${NGINX_INTERNAL_PORT_POST}"
+            - "${NGINX_EXTERNAL_PORT_ADMIN}:${NGINX_INTERNAL_PORT_ADMIN}"
+        environment:
+            - NGINX_PORT_USER=${NGINX_INTERNAL_PORT_USER}
+            - NGINX_PORT_POST=${NGINX_INTERNAL_PORT_POST}
+            - NGINX_PORT_ADMIN=${NGINX_INTERNAL_PORT_ADMIN}
+        networks:
+            - list
+    user:
+        build:
+            context: ../
+            dockerfile: docker/user_ms/php/Dockerfile
+        volumes:
+            - ./../services/user:/user
+            - ./../libs:/libs
+        networks:
+            - list
+    issue:
+        build:
+            context: ../
+            dockerfile: docker/issue_ms/php/Dockerfile
+        volumes:
+            - ./../services/issue:/issue
+            - ./../libs:/libs
+        networks:
+            - list
+    database:
+        image: postgres
+        environment:
+            POSTGRES_USER: ${POSTGRES_USER}
+            POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+            POSTGRES_DB: ${POSTGRES_DB}
+        ports:
+            - ${POSTGRES_PORT}:5432
+        volumes:
+            - postgres_data_dev:/var/lib/postgresql/data
+        networks:
+            - list
+    database_test:
+        image: postgres
+        environment:
+            POSTGRES_USER: ${POSTGRES_USER_TEST}
+            POSTGRES_PASSWORD: ${POSTGRES_PASSWORD_TEST}
+            POSTGRES_DB: ${POSTGRES_DB_TEST}
+        ports:
+            - ${POSTGRES_PORT_TEST}:5432
+        volumes:
+            - postgres_data_test:/var/lib/postgresql/data
+        networks:
+            - list
+    store:
+        build:
+            context: ../
+            dockerfile: docker/store_ms/dev/Dockerfile
+        volumes:
+            - './../services/store:/app'
+        ports:
+            - "3000:3000"
+        command: [ "npm", "start" ]
+        networks:
+            - list-frontend
 networks:
-  list:
+    list:
+    list-frontend:
 volumes:
-  postgres_data_dev:
-  postgres_data_test:
+    postgres_data_dev:
+    postgres_data_test:
