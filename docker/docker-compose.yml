@@ -17,6 +17,12 @@ services:
             - NGINX_PORT_ADMIN=${NGINX_INTERNAL_PORT_ADMIN}
         networks:
             - list
+    frontend:
+        build:
+            context: ../
+            dockerfile: docker/frontend/node/Dockerfile
+        volumes:
+            - ./../services/frontend:/frontend
     user:
         build:
             context: ../
