@@ -26,6 +26,15 @@ services:
             - ./../libs:/libs
         networks:
             - list
+    admin:
+        build:
+            context: ../
+            dockerfile: docker/admin_ms/php/Dockerfile
+        volumes:
+            - ./../services/admin:/admin
+            - ./../libs:/libs
+        networks:
+            - list
     issue:
         build:
             context: ../
@@ -59,17 +68,6 @@ services:
             - postgres_data_test:/var/lib/postgresql/data
         networks:
             - list
-    store:
-        build:
-            context: ../
-            dockerfile: docker/store_ms/dev/Dockerfile
-        volumes:
-            - './../services/store:/app'
-        ports:
-            - "3000:3000"
-        command: [ "npm", "start" ]
-        networks:
-            - list-frontend
 networks:
     list:
     list-frontend:
